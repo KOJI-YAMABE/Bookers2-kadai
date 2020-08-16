@@ -1,0 +1,35 @@
+<p id ="notice"></p>
+
+<h2>User info</h2>
+
+<%= form_for(@user, url: books_path) do |f| %>
+<% if @user.errors.any? %>
+  <div class="alert alert-warning">
+    <h3><%= @user.errors.count %>errors prohibited this obj from being saved:</h3>
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="field">
+  <%= f.label :name, "Name" %>
+ <%= f.text_field :name %>
+</div>
+
+<div class="field">
+  <%= f.label :profile_image_id, "Image" %>
+  <%= f.attachment_field :image %>
+</div>
+
+<div class="field">
+  <%= f.label :introduction, "Introduction" %>
+  <%= f.text_area :caption %>
+</div>
+
+<div class="actions">
+  <%= f.submit 'Update Book' %>
+</div>
+<% end %>
