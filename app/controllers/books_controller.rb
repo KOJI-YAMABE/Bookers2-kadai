@@ -1,7 +1,19 @@
 class BooksController < ApplicationController
 
+	def top
+	end
+
 	def new
 		@book = Book.new
+	end
+
+	def show
+		@book = Book.find(params[:id])
+	end
+
+	def index
+		@books = Book.all
+		@book = Book.page(params[:page]).reverse_order
 	end
 
 	def create
@@ -13,14 +25,6 @@ class BooksController < ApplicationController
 		@books = Book.all
 		render :index
 	    end
-	end
-
-	def index
-		@books = Book.all
-	end
-
-	def show
-		@book = Book.find(params[:id])
 	end
 
 	def edit
@@ -45,6 +49,7 @@ class BooksController < ApplicationController
 
 	private
 	def book_params
-		params.require(:book).permit(:title, :body)
+		params.require(:book).permit(:title, :body, :user_id)
 	end
 end
+
