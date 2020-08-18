@@ -12,7 +12,7 @@ class User < ApplicationRecord
   validates :introduction, length: {maximum: 50}
 
   has_many :books, dependent: :destroy
-  belongs_to :book
+  belongs_to :book, optional: true
 
    def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup

@@ -1,10 +1,11 @@
 class BooksController < ApplicationController
+ skip_before_action :authenticate_user!, only: [:top, :about]
+  #before_action :baria_user, only: [:edit, :update, :destroy]
 
 	def top
 	end
 
-	def new
-		@book = Book.new
+	def about
 	end
 
 	def show
@@ -13,17 +14,17 @@ class BooksController < ApplicationController
 
 	def index
 		@books = Book.all
-		@book = Book.page(params[:page]).reverse_order
+		@book = Book.new
 	end
 
 	def create
-		@book = Book.new(book_params)
-		@book.user_id = current_user.user_id
+		   @book = Book.new(book_params)
+		   @book.user_id = current_user.id
 		if @book.save
-		redirect_to book_path(@book), notice: 'You have creatad book successfully.'
+		   redirect_to book_path(@book), notice: 'You have creatad book successfully.'
 	   else
-		@books = Book.all
-		render :index
+		   @books = Book.all
+  		   render 'index'
 	    end
 	end
 
@@ -32,18 +33,17 @@ class BooksController < ApplicationController
 	end
 
 	def update
-		@book = Book.find(params[:id])
-		if @book.update
+		   @book = Book.find(params[:id])
+		if @book.update(book_params)
 		   redirect_to book_path(@book), notice: 'You have creatad book successfully.'
 		else
-		@books = Book.all
-		render :edit
+           render "edit"
 	    end
 	end
 
 	def destroy
-		book = Book.find(params[:id])
-		book.destroy
+		@book = Book.find(params[:id])
+		@book.destroy
 		redirect_to books_path
 	end
 

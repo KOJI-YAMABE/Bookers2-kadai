@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
+  root 'books#top'
   devise_for :users
-  get '/about', to: 'books#about'
-  root'books#top'
-  resources :books, only: [:new, :create, :index, :show, :edit, :destroy, :update]
+  get '/about' => 'books#about'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  resources :users, only: [:new, :index, :edit, :show, :update]
+  resources :users, only: [:index, :edit, :show, :update]
+  resources :books
 end
