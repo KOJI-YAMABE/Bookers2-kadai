@@ -1,23 +1,29 @@
-<p id="notice"></p>
-
-<%= render 'users/usersside', users: @users %>
-
-<h1>Users</h1>
-<table>
-	<thead>
-		<tr>
-			<th>image</th>
-			<th>name</th>
-			<th></th>
-		</tr>
-	</thead>
-	<tbody>
-		<% @users.each do |user| %>
-		 <tr>
-		   <td><%= attachment_image_tag user, :profile_image_id, :fill, 50, 50, format:'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %></td>
-		   <td><%= user.name %></td>
-		   <td><%= link_to "Show" user_path(user.id) %></td>
-		 </tr>
-		<% end %>
-	</tbody>
-</table>
+<div class="container">
+	<din class="row">
+		<div class="col-xs-3">
+          <%= render 'users/info', user: current_user %>
+          <%= render 'books/side', book: @book, user: current_user %>
+        </div>
+        <div class="col-xs-9">
+         <h1>Users</h1>
+          <table class="table">
+	        <thead>
+		      <tr>
+			    <th>image</th>
+			    <th>name</th>
+			    <th></th>
+		      </tr>
+	        </thead>
+	        <tbody>
+		      <% @users.each do |user| %>
+		      <tr>
+		        <td><%= attachment_image_tag user, :profile_image, :fill, 40, 40, format:'jpeg', class: "img-rounded pull-left profile-img", fallback: "no_image.jpg" %></td>
+		        <td><%= user.name %></td>
+		        <td><%= link_to "Show", user_path(user.id) %></td>
+		      </tr>
+		      <% end %>
+	        </tbody>
+          </table>
+        </div>
+    </din>
+</div>

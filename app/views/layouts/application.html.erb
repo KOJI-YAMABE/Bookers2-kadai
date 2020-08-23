@@ -9,43 +9,38 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 <body>
-      <div id="slidemenu">
-  <ul class="nav navbar-nav navbar-right" data-hover="dropdown" data-animations="zoomIn fadeIn fadeInUp fadeIn">
-
-    <span>Bookers</span>
+  <header>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+         <nav class="nav navbar-nav navbar-left"><h4 class="bookers">Bookers</h4>></nav>
+     </div>
+     <ul class="nav navbar-nav navbar-right">
     <% if user_signed_in? %>
-      <li class="">
-        <%= link_to 'Home', user_path(current_user) %>
-      </li>
-      <li class="">
-        <%= link_to 'Users', users_path %>
-      </li>
-       <li class="">
-        <%= link_to 'Books', books_path %>
-      </li>
-       <li class="">
-        <%= link_to "logout", destroy_user_session_path, method: :delete %>
-      </li>
+      <li><%= link_to ' Home', user_path(current_user), class: "home glyphicon glyphicon-home" %></li>
+      <li><%= link_to ' Users', users_path, class: "users glyphicon glyphicon-user" %></li>
+       <li><%= link_to ' Books', books_path, class: " books glyphicon glyphicon-book" %></li>
+       <li><%= link_to " logout", destroy_user_session_path, method: :delete, class: "logout glyphicon glyphicon-log-out" %></li>
     <% else %>
-    <li class="">
-        <%= link_to 'Home', root_path %>
-      </li>
-      <li class="">
-        <%= link_to 'About', about_path %>
-      </li>
-      <li class="">
-        <%= link_to "sign up", new_user_registration_path %>
-      </li>
-      <li class="">
-        <%= link_to "login", new_user_session_path %>
-      </li>
+      <li><%= link_to 'Home', root_path, class: "home glyphicon glyphicon-home" %></li>
+      <li><%= link_to 'About', home_about_path, class: "about glyphicon glyphicon-link" %></li>
+      <li><%= link_to "sign up", new_user_registration_path, class: "sign_uplyphicon glyphicon-edit" %></li>
+      <li><%= link_to "login", new_user_session_path, class: "sign_inglyphicon glyphicon-log-in" %></li>
     <% end %>
   </ul>
 </div>
+</nav>
+<h3>Bookers</h3>
 </header>
-      <%= yield %>
-</body>
-      <footer>
-        <p>CopyRight Infratop.inc     </p>
-      </footer>
+         <% flash.each do |message_type, message| %>
+          <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+          <% end %>
+    <%= yield %>
+      <div class="row">
+        <div class="col-xs-3 col-xs-offset-9">
+          <p>CopyRight Infratop.inc</p>
+      </div>
+    </div>
+
+  </body>
 </html>

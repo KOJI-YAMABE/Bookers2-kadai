@@ -1,24 +1,45 @@
 class UsersController < ApplicationController
+	before_action :authenticate_user!
+
 	def show
 		@user = User.find(params[:id])
-		@books = @user.books
-		@book = Book.new
+		@books = @user.books#.page(params[:page]).reverse_order
+		@bookpost = Book.new
+	end
+
+	def create
+		   @bookpost = Book.new(book_params)
+		   @bookpost.user_id = current_user.id
+		if
+		   @bookpost.save
+		   redirect_to book_path(@bookpost), notice: 'You have creatad book successfully.'
+	   else
+		   @books = Book.all
+  		   render 'index'
+	    end
 	end
 
 	def index
 		@users = User.all
-		@books = @user.books
-		@user = User.page(params[:page]).reverse_order
+		@book = Book.new
+		@user = current_user
 	end
 
 	def edit
 		@user = User.find(params[:id])
+	    if current_user != @user
+	    redirect_to user_path(current_user)
+	    end
 	end
 
 	def update
-  	    @user = User.find(params[:id])
-  	    @user.update(user_params)
-  	    redirect_to user_path(@user.id)
+  	       @user = User.find(params[:id])
+  	    if
+  	       @user.update(user_params)
+  	       redirect_to user_path(@user), notice: 'You have creatad book successfully.'
+  	   else
+  	       render 'edit'
+  	   end
     end
 
 	private
@@ -26,3 +47,4 @@ class UsersController < ApplicationController
 		params.require(:user).permit(:name, :introduction, :profile_image)
 	end
 end
+

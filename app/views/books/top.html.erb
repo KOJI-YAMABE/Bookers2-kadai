@@ -1,5 +1,20 @@
-<h2>welcome to<br>Bookers !!</h2>
+<div class="container">
+	<div class="row">
+<div class="top-message col-md-offset-3 col-md-6">
+  <h1>welcome to<br><span class="books glyphicon glyphicon-book" aria-hidden="true"><strong>Bookers</strong>  !!</span></h1>
+<p>In<span class="books glyphicon glyphicon-book" aria-hidden="true">
+</span><strong>Bookers</strong>,</p>
+<p>you can share and exchange your opinions , inpressions , and<br> emotions</p>
+<p> about various books!</p>
 
-<p>In Bookers,<br>you can share and exchange your opinions , inpressions , and emotions<br>about various books!</p>
-   <%= link_to "Log in", new_user_session_path %>
-    <%= link_to "Sign Up", new_user_registration_path %>
+<div class="btn-wrapper">
+	<div class="row">
+      <p class="log-in"><%= link_to "Log in", new_user_session_path, class: "sign_in btn btn-info col-xs-10 col-xs-offset-1" %></p>
+    </div>
+	<div class="row">
+       <p class="sign-up"><%= link_to "Sign Up", new_user_registration_path, class: "sign_up btn btn-success col-xs-10 col-xs-offset-1" %></p>
+    </div>
+</div>
+</div>
+</div>
+</div>
